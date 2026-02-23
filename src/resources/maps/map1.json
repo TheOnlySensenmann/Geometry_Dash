@@ -1,0 +1,6 @@
+{
+  "objects": [
+    {"x": 5, "type": "BLOCK", "y": 0},
+    {"x": 3, "type": "BLOCK", "y": 1}
+  ]
+}
