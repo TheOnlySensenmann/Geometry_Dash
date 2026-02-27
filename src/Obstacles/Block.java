@@ -13,7 +13,6 @@ import java.io.IOException;
 
 public class Block extends Obstacle{
     private static final String IMG_PATH_NAME = "block.png";
-    private static final ObstacleTypes OBSTACLE_TYPE = ObstacleTypes.BLOCK;
 
 
     public Block(ObstacleTypes obstacleType, String imageFileName, int x, int y) {
