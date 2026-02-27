@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public abstract class Obstacle implements Part {
+public abstract class Obstacle {
     public int hitboxX;
     public int hitboxY;
     public int hitboxWidth;

@@ -13,41 +13,12 @@ import java.io.IOException;
 
 public class Block extends Obstacle{
     private static final String IMG_PATH_NAME = "block.png";
-    private static final BufferedImage blockImage;
+    private static final ObstacleTypes OBSTACLE_TYPE = ObstacleTypes.BLOCK;
 
-
-
-
-    static {
-        try {
-            blockImage = ImageIO.read(new File(IMG_PATH_NAME));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     public Block(ObstacleTypes obstacleType, String imageFileName, int x, int y) {
         super(obstacleType, imageFileName, x, y);
     }
 
 
-    @Override
-    public void update(double delta) {
-
-    }
-
-    @Override
-    public void render(Graphics g) {
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
 }
