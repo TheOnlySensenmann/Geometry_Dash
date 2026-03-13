@@ -8,4 +8,8 @@ public class Level {
     public Level() {
 
     }
+
+    public List<LevelObjects> getObjects() {
+        return objects;
+    }
 }

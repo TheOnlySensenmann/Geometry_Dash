@@ -15,8 +15,13 @@ public class Block extends Obstacle{
     private static final String IMG_PATH_NAME = "block.png";
 
 
-    public Block(ObstacleTypes obstacleType, String imageFileName, int x, int y) {
-        super(obstacleType, imageFileName, x, y);
+    public Block(int x, int y) {
+        super(ObstacleTypes.BLOCK, x, y);
+    }
+
+
+    public Block(LevelObjects levelObject) {
+        super(ObstacleTypes.BLOCK, levelObject.getX(), levelObject.getY());
     }
 
 
