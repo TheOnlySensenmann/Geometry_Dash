@@ -6,6 +6,7 @@ import Parts.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class ObstacleHandler implements Part {
 
@@ -15,9 +16,14 @@ public class ObstacleHandler implements Part {
         obstacles = new ArrayList<>();
         for(int i = 0; i< level.getObjects().size(); i++){
             obstacles.add(getObstacleClassFromLevelObject(level.getObjects().get(i)));
-
         }
 
+        obstacles.sort((o1, o2) -> {
+            if(o1.x == o2.x){
+                return Integer.compare(o1.y, o2.y);
+            }
+            return Integer.compare(o1.x, o2.x);
+        });
     }
 
 
