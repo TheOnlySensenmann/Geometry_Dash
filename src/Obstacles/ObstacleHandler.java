@@ -16,7 +16,8 @@ public class ObstacleHandler implements Part {
     private int currentStartIndexForObstacles;
     private int currentEndIndexForObstacles;
 
-    public ObstacleHandler(Level level, GameLoop gameLoop) {
+    public ObstacleHandler(GameLoop gameLoop) {
+        Level level = gameLoop.getLevel();
         this.currentStartIndexForObstacles = 0;
         this.currentEndIndexForObstacles = 0;
         this.gameLoop = gameLoop;
@@ -38,7 +39,7 @@ public class ObstacleHandler implements Part {
     private Obstacle getObstacleClassFromLevelObject(LevelObjects object) {
         return switch (object.getType()) {
             case "BLOCK" -> new Block(object);
-            case "SPIKE" -> new Spike(object);
+//            case "SPIKE" -> new Spike(object);
             default -> throw new IllegalArgumentException("Invalid obstacle type");
         };
     }
@@ -49,17 +50,20 @@ public class ObstacleHandler implements Part {
     public void update(double delta) {
         double currentX = gameLoop.getBlockPosition();
 
-        while(obstacles.get(currentStartIndexForObstacles).x < currentX){
+        while(currentStartIndexForObstacles < obstacles.size() - 1 && obstacles.get(currentStartIndexForObstacles).x < currentX){
             currentStartIndexForObstacles++;
         }
-        while(obstacles.get(currentEndIndexForObstacles).x < currentX + gameLoop.getBlocksOnScreenWith()){
+        while(currentEndIndexForObstacles < obstacles.size() -1 && obstacles.get(currentEndIndexForObstacles).x < currentX + gameLoop.getBlocksOnScreenWith()){
             currentEndIndexForObstacles++;
         }
     }
 
     @Override
     public void render(Graphics g) {
-
+        for(int i = currentStartIndexForObstacles; i < currentEndIndexForObstacles; i++){
+            Obstacle obstacle = obstacles.get(i);
+            g.drawImage(obstacle.obstacleType.image,  obstacle.x, obstacle.y, GameLoop.BLOCK_SIZE, GameLoop.BLOCK_SIZE, null);
+        }
     }
 
     @Override
