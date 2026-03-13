@@ -12,9 +12,6 @@ import java.io.File;
 import java.io.IOException;
 
 public class Block extends Obstacle{
-    private static final String IMG_PATH_NAME = "block.png";
-
-
     public Block(int x, int y) {
         super(ObstacleTypes.BLOCK, x, y);
     }

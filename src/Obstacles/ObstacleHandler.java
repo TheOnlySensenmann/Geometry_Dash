@@ -2,17 +2,24 @@ package Obstacles;
 
 import LevelHandlers.*;
 import Parts.*;
+import Runners.GameLoop;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Comparator;
 
 public class ObstacleHandler implements Part {
 
-    ArrayList<Obstacle> obstacles;
+    private ArrayList<Obstacle> obstacles;
+    private GameLoop gameLoop;
 
-    public ObstacleHandler(Level level) {
+    private int currentStartIndexForObstacles;
+    private int currentEndIndexForObstacles;
+
+    public ObstacleHandler(Level level, GameLoop gameLoop) {
+        this.currentStartIndexForObstacles = 0;
+        this.currentEndIndexForObstacles = 0;
+        this.gameLoop = gameLoop;
         obstacles = new ArrayList<>();
         for(int i = 0; i< level.getObjects().size(); i++){
             obstacles.add(getObstacleClassFromLevelObject(level.getObjects().get(i)));
@@ -29,21 +36,25 @@ public class ObstacleHandler implements Part {
 
 
     private Obstacle getObstacleClassFromLevelObject(LevelObjects object) {
-        switch (object.getType()) {
-            case "BLOCK":
-                return new Block(object);
-            case "SPIKE":
-                return new Spike(object);
-            default:
-                throw new IllegalArgumentException("Invalid obstacle type");
-        }
+        return switch (object.getType()) {
+            case "BLOCK" -> new Block(object);
+            case "SPIKE" -> new Spike(object);
+            default -> throw new IllegalArgumentException("Invalid obstacle type");
+        };
     }
 
 
 
     @Override
     public void update(double delta) {
+        double currentX = gameLoop.getBlockPosition();
 
+        while(obstacles.get(currentStartIndexForObstacles).x < currentX){
+            currentStartIndexForObstacles++;
+        }
+        while(obstacles.get(currentEndIndexForObstacles).x < currentX + gameLoop.getBlocksOnScreenWith()){
+            currentEndIndexForObstacles++;
+        }
     }
 
     @Override
