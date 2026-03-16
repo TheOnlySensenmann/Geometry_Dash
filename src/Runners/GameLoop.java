@@ -27,6 +27,7 @@ public class GameLoop implements Runnable{
     private int screenHeight;
     private int standardY;
     private Panel panel;
+    private int blocksOnScreenWith;
 
     private double position = 0;
     private int blockPosition;
@@ -54,6 +55,7 @@ public class GameLoop implements Runnable{
                 throw new RuntimeException(e);
             }
         }
+        blocksOnScreenWith = screenWidth / BLOCK_SIZE;
         position = 0;
         standardY = (int) ((groundPercent/100)*screenHeight);
         currentY = standardY;
@@ -145,6 +147,10 @@ public class GameLoop implements Runnable{
 
     public int getScreenHeight() {
         return screenHeight;
+    }
+
+    public int getBlocksOnScreenWith(){
+        return blocksOnScreenWith;
     }
 
     public int getScreenWidth() {
