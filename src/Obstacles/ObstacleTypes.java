@@ -6,10 +6,11 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 public enum ObstacleTypes {
-    BLOCK(0,0,GameLoop.BLOCK_SIZE,GameLoop.BLOCK_SIZE, "Obstacles/block.png"),
-    SPIKE(5, 5, 20, 40, "Obstacles/spike.png"),;
+    BLOCK(0,0,GameLoop.BLOCK_SIZE,GameLoop.BLOCK_SIZE, "img/Obstacles/Block.jpg"),;
+    //SPIKE(5, 5, 20, 40, "Obstacles/spike.png"),;
 
 
     int hitboxY;
@@ -24,9 +25,8 @@ public enum ObstacleTypes {
         this.hitboxWidth = hitboxWidth;
         this.hitboxHeight = hitboxHeight;
 
-        try{
-            BufferedImage image = ImageIO.read(new File(imagePath));
-            this.image = image;
+        try(InputStream input = getClass().getClassLoader().getResourceAsStream(imagePath)){
+            this.image = ImageIO.read(input);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

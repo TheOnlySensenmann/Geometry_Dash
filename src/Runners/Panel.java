@@ -71,6 +71,7 @@ public class Panel extends JPanel {
 
         parts.add(new Background(gameLoop));
         parts.add(new Figure(gameLoop));
+        parts.add(new ObstacleHandler(gameLoop));
 
 
 
