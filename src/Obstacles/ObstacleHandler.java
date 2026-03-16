@@ -2,7 +2,6 @@ package Obstacles;
 
 import LevelHandlers.*;
 import Parts.*;
-import Runners.*;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -14,19 +13,24 @@ public class ObstacleHandler implements Part {
 
     public ObstacleHandler(Level level) {
         obstacles = new ArrayList<>();
+        for(int i = 0; i< level.getObjects().size(); i++){
+            obstacles.add(getObstacleClassFromLevelObject(level.getObjects().get(i)));
+
+        }
 
     }
 
 
 
-    private Class getObstacleClassFromString(String obstacleType) {
-        switch (obstacleType) {
+    private Obstacle getObstacleClassFromLevelObject(LevelObjects object) {
+        switch (object.getType()) {
             case "BLOCK":
-                return Block.class;
+                return new Block(object);
             case "SPIKE":
-                return Spike.class;
+                return new Spike(object);
+            default:
+                throw new IllegalArgumentException("Invalid obstacle type");
         }
-
     }
 
 
