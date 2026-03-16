@@ -60,9 +60,9 @@ public class ObstacleHandler implements Part {
 
     @Override
     public void render(Graphics g) {
-        for(int i = currentStartIndexForObstacles; i < currentEndIndexForObstacles; i++){
+        for(int i = currentStartIndexForObstacles; i <= currentEndIndexForObstacles; i++){
             Obstacle obstacle = obstacles.get(i);
-            g.drawImage(obstacle.obstacleType.image,  obstacle.x, obstacle.y, GameLoop.BLOCK_SIZE, GameLoop.BLOCK_SIZE, null);
+            g.drawImage(obstacle.obstacleType.image, (int) (obstacle.x*GameLoop.BLOCK_SIZE-gameLoop.getPosition()), gameLoop.getStandardY() - GameLoop.BLOCK_SIZE*(obstacle.y + 1), GameLoop.BLOCK_SIZE, GameLoop.BLOCK_SIZE, null);
         }
     }
 
